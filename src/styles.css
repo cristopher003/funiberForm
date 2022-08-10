@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    /* el tamaño por defecto es 14px */
+    font-size: 14px !important;
+    color: rgb(66, 65, 65);
+}
+
