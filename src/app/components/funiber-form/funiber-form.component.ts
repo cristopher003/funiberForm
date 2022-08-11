@@ -27,6 +27,7 @@ export class FuniberFormComponent implements OnInit {
   this.funiberForm=this.initForm();
   this.countries=this.data.countries;
   this.areas=this.data.areas;
+  console.log(this.countries)
   }
 
   onSubmit(){
@@ -37,8 +38,8 @@ export class FuniberFormComponent implements OnInit {
 
   initForm(): FormGroup {
    return this.fb.group({
-      knowledge:['Select an area',[Validators.required]],
-      program:['Select a program',[Validators.required]],
+      knowledge:['',[Validators.required]],
+      program:['',[Validators.required]],
       names:['',[Validators.required]],
       lastNames:['',[Validators.required]],
       email:['',[Validators.required]],

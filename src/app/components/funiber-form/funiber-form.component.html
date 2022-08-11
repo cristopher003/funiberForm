@@ -1,92 +1,114 @@
 <app-header></app-header>
-<div class="container mb-5" >
-    <h5 class="pt-3 pb-3" style="color: rgb(0 113 174);">Resquest information</h5>
+<div class="container mb-5">
+  <h5 class="pt-3 pb-3" style="color: rgb(0 113 174);">Resquest information</h5>
   <form (ngSubmit)="onSubmit()" [formGroup]="funiberForm" class="row">
     <div class="col-md-6 mt-2">
-        <label for="knowledge" class="form-label "><strong>knowledge Area</strong> </label>
-        <select id="knowledge" class="form-select" required formControlName="knowledge" (change)="chargueArea($event)">
-          <option value="" *ngIf="!funiberForm.get('knowledge')?.touched " selected>Select an area</option>
-          <option [value]="area"  *ngFor="let area of areas">{{ area }}</option>
-        </select>
-        <div *ngIf="funiberForm.get('knowledge')?.touched && funiberForm.get('knowledge')?.errors?.['required'] "
-         class="alert alert-danger">knowledge is required</div>
-      </div>
+      <label for="knowledge" class="form-label "><strong>knowledge Area</strong> </label>
+      <select [ngClass]="{'is-invalid':!funiberForm.get('knowledge')?.valid && funiberForm.get('knowledge')?.touched}"
+        id="knowledge" class="form-select" required formControlName="knowledge" (change)="chargueArea($event)">
+        <option *ngIf="!funiberForm.get('knowledge')?.touched " value="" disabled selected hidden>Select an
+          area</option>
+        <option [value]="area" *ngFor="let area of areas">{{ area }}</option>
+      </select>
+      <div *ngIf="funiberForm.get('knowledge')?.touched && funiberForm.get('knowledge')?.errors?.['required'] "
+        class="invalid-feedback">knowledge is required</div>
+    </div>
 
-      <div class="col-md-6  mt-2">
-        <label for="program" class="form-label"><strong>program</strong></label>
-        <select id="program" class="form-select" required formControlName="program">
-          <option selected>Select a program</option>
-          <option [value]="program"  *ngFor="let program of programs">{{ program }}</option>
-        </select>
-        <div *ngIf="funiberForm.get('program')?.touched && funiberForm.get('program')?.errors?.['required'] "
-        class="alert alert-danger">knowledge is program</div>
-      </div>
+    <div class="col-md-6  mt-2">
+      <label for="program" class="form-label"><strong>program</strong></label>
+      <select  [ngClass]="{'is-invalid':!funiberForm.get('program')?.valid && funiberForm.get('program')?.touched}"
+      id="program" class="form-select" required formControlName="program">
+        <option value="" *ngIf="!funiberForm.get('program')?.touched " disabled selected hidden>Select a program</option>
+        <option [value]="program" *ngFor="let program of programs">{{ program }}</option>
+      </select>
+      <div *ngIf="funiberForm.get('program')?.touched && funiberForm.get('program')?.errors?.['required'] "
+      class="invalid-feedback">knowledge is required</div>
+    </div>
 
-      <div class="col-md-6  mt-3">
-        <label for="names" class="form-label"><strong>Names</strong></label>
-        <input type="text" class="form-control" id="names" required placeholder="names" formControlName="names">
-      </div>
+    <div class="col-md-6  mt-3">
+      <label for="names" class="form-label"><strong>Names</strong></label>
+      <input  [ngClass]="{'is-invalid':!funiberForm.get('names')?.valid && funiberForm.get('names')?.touched}" type="text" class="form-control" id="names" required placeholder="names" formControlName="names">
+      <div *ngIf="funiberForm.get('names')?.touched && funiberForm.get('names')?.errors?.['required'] "
+      class="invalid-feedback">names is required</div>
+    </div>
+    
+    
 
-      <div class="col-md-6  mt-3">
-        <label for="lastNames" class="form-label"><strong>Last Names</strong></label>
-        <input type="text" class="form-control" id="lastNames" required placeholder="Last name" formControlName="lastNames">
-      </div>
+    <div class="col-md-6  mt-3">
+      <label for="lastNames" class="form-label"><strong>Last Names</strong></label>
+      <input  [ngClass]="{'is-invalid':!funiberForm.get('lastNames')?.valid && funiberForm.get('lastNames')?.touched}" type="text" class="form-control" id="lastNames" required placeholder="Last name"
+        formControlName="lastNames">
+        <div *ngIf="funiberForm.get('lastNames')?.touched && funiberForm.get('lastNames')?.errors?.['required'] "
+        class="invalid-feedback">last Names is required</div>
+    </div>
 
     <div class="col-md-6 mt-3">
-        <label for="email" class="form-label"><strong>E-mail</strong></label>
-        <input type="email" class="form-control" id="email" required  placeholder="E-mail" formControlName="email">
-      </div>
-      
-      <div class="col-md-6 mt-3">
-        <label for="phone" class="form-label"><strong>Phone</strong></label>
-        <input type="text" class="form-control" id="phone" required  placeholder="Phone" formControlName="phone">
-      </div>
+      <label for="email" class="form-label"><strong>E-mail</strong></label>
+      <input  [ngClass]="{'is-invalid':!funiberForm.get('email')?.valid && funiberForm.get('email')?.touched}" type="email" class="form-control" id="email" required placeholder="E-mail" formControlName="email">
+      <div *ngIf="funiberForm.get('email')?.touched && funiberForm.get('email')?.errors?.['required'] "
+      class="invalid-feedback">email is required</div>
+    </div>
 
-      <div class="col-md-6 mt-3">
-        <label for="country" class="form-label"><strong>Country of residence</strong></label>
-        <select id="country" class="form-select" required formControlName="country"  (change)="chargueState($event)">
-          <option selected>Select country</option>
-          <option [value]="country.country_name"  *ngFor="let country of countries">{{ country.country_name }}</option>
-        </select>
-      </div>
+    <div class="col-md-6 mt-3">
+      <label for="phone" class="form-label"><strong>Phone</strong></label>
+      <input  [ngClass]="{'is-invalid':!funiberForm.get('phone')?.valid && funiberForm.get('phone')?.touched}" type="text" class="form-control" id="phone" required placeholder="Phone" formControlName="phone">
+      <div *ngIf="funiberForm.get('phone')?.touched && funiberForm.get('phone')?.errors?.['required'] "
+      class="invalid-feedback">Phone is required</div>
+    </div>
 
-      <div class="col-md-6 mt-3">
-        <label for="state" class="form-label"><strong>State</strong></label>
-        <select id="state" class="form-select" required formControlName="state"  (change)="chargueCity($event)">
-          <option  selected>Select state</option>
-          <option   [value]="state" *ngFor="let state of states">{{ state }}</option>
-          <option  *ngIf="states.length<=0" >Cargando....</option>
-        </select>
-      </div>
-     
-      <div class="col-md-6 mt-3">
-        <label for="city" class="form-label"><strong>City</strong></label>
-        <select id="city" class="form-select" required formControlName="city">
-            <option   selected>Select city</option>
-          <option  [value]="city" *ngFor="let city of cities">{{ city }}</option>
-            <option  *ngIf="cities.length<=0" >Cargando....</option>
-          </select>
-       </div>  
-     
-       <div class="col-md-6 mt-3">
-        <label for="comments" class="form-label"><strong>Comments</strong></label>
-        <textarea type="text"  maxlength="150" class="form-control" id="comments" placeholder="Comments" formControlName="comments">
+    <div class="col-md-6 mt-3">
+      <label for="country" class="form-label"><strong>Country of residence</strong></label>
+      <select  [ngClass]="{'is-invalid':!funiberForm.get('country')?.valid && funiberForm.get('country')?.touched}" id="country" class="form-select" required formControlName="country" (change)="chargueState($event)">
+        <option *ngIf="!funiberForm.get('country')?.touched " value=""  disabled selected hidden>Select country</option>
+        <option [value]="country.country_name" *ngFor="let country of countries">{{ country.country_name }}</option>
+      </select>
+      <div *ngIf="funiberForm.get('country')?.touched && funiberForm.get('country')?.errors?.['required'] "
+      class="invalid-feedback">Country is required</div>
+    </div>
+
+    <div class="col-md-6 mt-3">
+      <label for="state" class="form-label"><strong>State</strong></label>
+      <select  [ngClass]="{'is-invalid':!funiberForm.get('state')?.valid && funiberForm.get('state')?.touched}" id="state" class="form-select" required formControlName="state" (change)="chargueCity($event)">
+        <option *ngIf="!funiberForm.get('state')?.touched " value="" disabled selected hidden>Select state</option>
+        <option [value]="state" *ngFor="let state of states">{{ state }}</option>
+      </select>
+      <div *ngIf="funiberForm.get('state')?.touched && funiberForm.get('state')?.errors?.['required'] "
+      class="invalid-feedback">state is required</div>
+    </div>
+
+    <div class="col-md-6 mt-3">
+      <label for="city" class="form-label"><strong>City</strong></label>
+      <select  [ngClass]="{'is-invalid':!funiberForm.get('city')?.valid && funiberForm.get('city')?.touched}" id="city" class="form-select" required formControlName="city">
+        <option *ngIf="!funiberForm.get('city')?.touched " value="" disabled selected hidden>Select city</option>
+        <option [value]="city" *ngFor="let city of cities">{{ city }}</option>
+      </select>
+      <div *ngIf="funiberForm.get('city')?.touched && funiberForm.get('city')?.errors?.['required'] "
+      class="invalid-feedback">city is required</div>
+    </div>
+
+    <div class="col-md-6 mt-3">
+      <label for="comments" class="form-label"><strong>Comments</strong></label>
+      <textarea type="text" maxlength="150" class="form-control" id="comments" placeholder="Comments"
+        formControlName="comments">
         </textarea>
-      </div>
+    </div>
 
-      <div class="col-12 mt-4">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="policy" formControlName="policy" required>
-          <label class="form-check-label" for="gridCheck">
-            I accept <span class="text-info">the privacy policy</span>
-          </label>
-        </div>
+    <div class="col-12 mt-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="policy" formControlName="policy" required>
+        <label class="form-check-label" for="gridCheck">
+          I accept <span class="text-info">the privacy policy</span>
+        </label>
+        <div *ngIf="!funiberForm.get('policy')?.value"
+        class="invalid-feedback">Please accept the privacy policy</div>
       </div>
+    </div>
 
-      <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary pb-0 pt-0" style="background: rgb(6 170 235);border: rgb(6 170 235);">
-            <i class="fa fa-send-o p-2"></i>Send</button>
-      </div>
+    <div class="col-12 text-center">
+      <button type="submit" class="btn btn-primary pb-0 pt-0"
+        style="background: rgb(6 170 235);border: rgb(6 170 235);">
+        <i class="fa fa-send-o p-2"></i>Send</button>
+    </div>
   </form>
 </div>
 

@@ -47,12 +47,20 @@ export class DataService {
   getCountries(){
     if (!localStorage.getItem('countries')) {
       let headers = {'Authorization':`Bearer ${this.token}`}
-      this.http.get<Countries>(`${API}countries`, { headers }).pipe(
-        map((countries:Countries)=>{
-          this.countries=countries.countries;
+      this.http.get<any>(`${API}countries`, { headers }).subscribe(
+        (countries)=>{
+          countries.forEach((countrie:Country) => {
+            this.countries.push(countrie);
+          })
           localStorage.setItem('countries',JSON.stringify(this.countries));
-        } )
+        }
       )
+      // this.http.get<Countries>(`${API}countries`, { headers }).pipe(
+      //   map((countries:Countries)=>{
+      //     this.countries=countries.countries;
+      //     localStorage.setItem('countries',JSON.stringify(this.countries));
+      //   } )
+      // )
     }else{
       this.countries=JSON.parse(localStorage.getItem('countries') || "[]");
     //  console.log(this.countries+JSON.stringify(localStorage.getItem('countries')));
@@ -64,7 +72,7 @@ export class DataService {
     let headers = {'Authorization':`Bearer ${this.token}`}
     this.http.get<any>(`${API}states/${countrie}`, { headers}).subscribe( resp=>{
       resp.forEach((element: any) => {
-        console.log(element.state_name);
+        // console.log(element.state_name);
         this.states.push(element.state_name);
       });
     } );
@@ -78,7 +86,7 @@ export class DataService {
         this.cities.push("there are no cities");
       }else{
         resp.forEach((element: any) => {
-          console.log(element.city_name);
+          // console.log(element.city_name);
           this.cities.push(element.city_name);
         });
       }
@@ -90,7 +98,7 @@ export class DataService {
     this.ariasAndProgram.forEach((element: any) => {
     this.areas.push(element['area']);
     });
-    console.log(this.areas);
+    // console.log(this.areas);
   }
 
   getProgram(area:string){
@@ -101,7 +109,7 @@ export class DataService {
           this.programs.push(program);
         });
       }});
-    console.log(this.programs);
+    // console.log(this.programs);
   }
 
   // private statesArray(statesObj :Object){
