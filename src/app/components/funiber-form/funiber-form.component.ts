@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, pipe } from 'rxjs';
-import { Country, State, States } from 'src/app/interfaces/response';
+import { Country} from 'src/app/interfaces/response';
 import { DataService } from 'src/app/services/data.service';
-
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -27,21 +26,19 @@ export class FuniberFormComponent implements OnInit {
   this.funiberForm=this.initForm();
   this.countries=this.data.countries;
   this.areas=this.data.areas;
-  console.log(this.countries)
   }
 
   onSubmit(){
     if (this.funiberForm.invalid) {
-      this.data.savedata(this.funiberForm.value);
-
-      if(this.funiberForm.get('policy')?.value){
-
-      }else{
-
-      }
-      console.log(this.funiberForm.value)
+   
+        this.showAlert("please enter all the data  ","error")
+    
     }else{
-      this.data.savedata(this.funiberForm.value);
+     const resp= this.data.savedata(this.funiberForm.value);
+      if (!resp) {
+        this.showAlert("Data Send");
+        this.funiberForm.reset();
+      }else{ this.showAlert("Error")}
     }
   }
 
@@ -87,4 +84,11 @@ export class FuniberFormComponent implements OnInit {
     this.programs=this.data.programs;
     
   }
+
+ showAlert(message:string,icon:any='success'){
+  Swal.fire({
+    icon: icon,
+    title: message,
+  })
+ }
 }

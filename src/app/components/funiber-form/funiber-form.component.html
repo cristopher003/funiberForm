@@ -101,13 +101,12 @@
         <label class="form-check-label" for="gridCheck">
           I accept <span class="text-info">the privacy policy</span>
         </label>
-        <div *ngIf="!funiberForm.get('policy')?.value"
-        class="invalid-feedback">Please accept the privacy policy</div>
+        <div *ngIf="funiberForm.get('policy')?.touched  && !funiberForm.get('policy')?.value" class="text-danger">Please accept the privacy policy</div>
       </div>
     </div>
 
     <div class="col-12 text-center">
-      <button type="submit" class="btn btn-primary pb-0 pt-0"
+      <button type="submit"  class="btn btn-primary pb-0 pt-0"
         style="background: rgb(6 170 235);border: rgb(6 170 235);">
         <i class="fa fa-send-o p-2"></i>Send</button>
     </div>

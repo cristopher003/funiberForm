@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   apiToken:'wJUeN74UveNS1pngwGn2EH4khpyyYLUc2PXHewW0vB5jto6y65Q8qU07XQcGdxtlhw4',
-  userEmail:'cristophersolis003@gmail.com'
-
+  userEmail:'cristophersolis003@gmail.com',
+  API:'https://www.universal-tutorial.com/api/',
+  API_FUNIBER:'http://localhost:4000/api/'// Para local cambiar al 8080
 };
 
 /*

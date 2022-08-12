@@ -10,8 +10,10 @@ const headers = {
   'user-email': environment.userEmail 
 }
 
-const API='https://www.universal-tutorial.com/api/';
-const API_FUNIBER='http://localhost:8080/api/';
+const API=environment.API;
+const API_FUNIBER=environment.API_FUNIBER;
+// const API_FUNIBER='http://localhost:8080/api/';
+
 
 @Injectable()
 export class DataService {
@@ -41,8 +43,9 @@ export class DataService {
     if (!localStorage.getItem('token')) {
     this.getAccessToken();
     }else{
+      this.getAccessToken();
       this.token=localStorage.getItem('token');
-      console.log(localStorage.getItem('token'));
+      // console.log(localStorage.getItem('token'));
     }
   }
 
@@ -57,15 +60,9 @@ export class DataService {
           localStorage.setItem('countries',JSON.stringify(this.countries));
         }
       )
-      // this.http.get<Countries>(`${API}countries`, { headers }).pipe(
-      //   map((countries:Countries)=>{
-      //     this.countries=countries.countries;
-      //     localStorage.setItem('countries',JSON.stringify(this.countries));
-      //   } )
-      // )
+
     }else{
       this.countries=JSON.parse(localStorage.getItem('countries') || "[]");
-    //  console.log(this.countries+JSON.stringify(localStorage.getItem('countries')));
     }
   }
 
@@ -74,7 +71,6 @@ export class DataService {
     let headers = {'Authorization':`Bearer ${this.token}`}
     this.http.get<any>(`${API}states/${countrie}`, { headers}).subscribe( resp=>{
       resp.forEach((element: any) => {
-        // console.log(element.state_name);
         this.states.push(element.state_name);
       });
     } );
@@ -88,7 +84,6 @@ export class DataService {
         this.cities.push("there are no cities");
       }else{
         resp.forEach((element: any) => {
-          // console.log(element.city_name);
           this.cities.push(element.city_name);
         });
       }
@@ -114,31 +109,31 @@ export class DataService {
     // console.log(this.programs);
   }
 
-  // private statesArray(statesObj :Object){
-  //   const states:State[]=[];
-
-  //   if (statesObj===null) {
-  //     return [];
-  //   }
-
-  //   Object.keys(statesObj).forEach(key=>{
-
-  //     const state:State= statesObj[key];
-  //     states.push(state);
-  //   });
-
-  //   return states;
-  // }
-
+ 
   savedata(dataform: any){
-    const body = JSON.stringify(dataform);
-    console.log(JSON.stringify(dataform))
-    this.http.post<any>(`${API_FUNIBER}cliente`, body).subscribe( resp=>{
-      resp.forEach((element: any) => {
-        // console.log(element.state_name);
-        console.log(element);
-      });
+    const body= this.getDataForm(dataform);
+    const resp="";
+     this.http.post<any>(`${API_FUNIBER}cliente`, body).subscribe( resp=>{
+     resp= resp.error;
     } );
+    return resp;
+  }
+
+
+  getDataForm(dataform: any ){
+   return {
+      area: dataform.area,
+      program: dataform.program,
+      names: dataform.names,
+      lastNames: dataform.lastNames,
+      email: dataform.email,
+      phone: dataform.phone,
+      country: dataform.country,
+      state: dataform.state,
+      city: dataform.city,
+      comment: dataform.comment
+      
+    }
   }
 
 }
