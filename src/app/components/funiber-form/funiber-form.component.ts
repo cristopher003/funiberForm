@@ -32,22 +32,31 @@ export class FuniberFormComponent implements OnInit {
 
   onSubmit(){
     if (this.funiberForm.invalid) {
-      console.log(this.funiberForm.value);
+      this.data.savedata(this.funiberForm.value);
+
+      if(this.funiberForm.get('policy')?.value){
+
+      }else{
+
+      }
+      console.log(this.funiberForm.value)
+    }else{
+      this.data.savedata(this.funiberForm.value);
     }
   }
 
   initForm(): FormGroup {
    return this.fb.group({
-      knowledge:['',[Validators.required]],
+      area:['',[Validators.required]],
       program:['',[Validators.required]],
       names:['',[Validators.required]],
       lastNames:['',[Validators.required]],
-      email:['',[Validators.required]],
-      phone:['',[Validators.required]],
+      email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+      phone:['',[Validators.required,]],
       country:['',[Validators.required]],
       state:['',[Validators.required]],
       city:['',[Validators.required]],
-      comments:[''],
+      comment:[''],
       policy:[false,[Validators.required]],
     });
  

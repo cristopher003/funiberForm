@@ -11,6 +11,8 @@ const headers = {
 }
 
 const API='https://www.universal-tutorial.com/api/';
+const API_FUNIBER='http://localhost:8080/api/';
+
 @Injectable()
 export class DataService {
 
@@ -127,5 +129,16 @@ export class DataService {
 
   //   return states;
   // }
+
+  savedata(dataform: any){
+    const body = JSON.stringify(dataform);
+    console.log(JSON.stringify(dataform))
+    this.http.post<any>(`${API_FUNIBER}cliente`, body).subscribe( resp=>{
+      resp.forEach((element: any) => {
+        // console.log(element.state_name);
+        console.log(element);
+      });
+    } );
+  }
 
 }

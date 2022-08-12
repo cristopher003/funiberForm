@@ -3,14 +3,14 @@
   <h5 class="pt-3 pb-3" style="color: rgb(0 113 174);">Resquest information</h5>
   <form (ngSubmit)="onSubmit()" [formGroup]="funiberForm" class="row">
     <div class="col-md-6 mt-2">
-      <label for="knowledge" class="form-label "><strong>knowledge Area</strong> </label>
-      <select [ngClass]="{'is-invalid':!funiberForm.get('knowledge')?.valid && funiberForm.get('knowledge')?.touched}"
-        id="knowledge" class="form-select" required formControlName="knowledge" (change)="chargueArea($event)">
-        <option *ngIf="!funiberForm.get('knowledge')?.touched " value="" disabled selected hidden>Select an
+      <label for="area" class="form-label "><strong>knowledge Area</strong> </label>
+      <select [ngClass]="{'is-invalid':!funiberForm.get('area')?.valid && funiberForm.get('area')?.touched}"
+        id="area" class="form-select" required formControlName="area" (change)="chargueArea($event)">
+        <option *ngIf="!funiberForm.get('area')?.touched " value="" disabled selected hidden>Select an
           area</option>
         <option [value]="area" *ngFor="let area of areas">{{ area }}</option>
       </select>
-      <div *ngIf="funiberForm.get('knowledge')?.touched && funiberForm.get('knowledge')?.errors?.['required'] "
+      <div *ngIf="funiberForm.get('area')?.touched && funiberForm.get('area')?.errors?.['required'] "
         class="invalid-feedback">knowledge is required</div>
     </div>
 
@@ -44,9 +44,11 @@
 
     <div class="col-md-6 mt-3">
       <label for="email" class="form-label"><strong>E-mail</strong></label>
-      <input  [ngClass]="{'is-invalid':!funiberForm.get('email')?.valid && funiberForm.get('email')?.touched}" type="email" class="form-control" id="email" required placeholder="E-mail" formControlName="email">
+      <input    [ngClass]="{'is-invalid':!funiberForm.get('email')?.valid && funiberForm.get('email')?.touched}" type="email" class="form-control" id="email" required placeholder="E-mail" formControlName="email">
       <div *ngIf="funiberForm.get('email')?.touched && funiberForm.get('email')?.errors?.['required'] "
       class="invalid-feedback">email is required</div>
+      <div *ngIf="funiberForm.get('email')?.touched && funiberForm.get('email')?.errors?.['pattern']"
+      class="invalid-feedback">email valid required</div>
     </div>
 
     <div class="col-md-6 mt-3">
@@ -87,9 +89,9 @@
     </div>
 
     <div class="col-md-6 mt-3">
-      <label for="comments" class="form-label"><strong>Comments</strong></label>
-      <textarea type="text" maxlength="150" class="form-control" id="comments" placeholder="Comments"
-        formControlName="comments">
+      <label for="comment" class="form-label"><strong>Comments</strong></label>
+      <textarea type="text" maxlength="150" class="form-control" id="comment" placeholder="Comment"
+        formControlName="comment">
         </textarea>
     </div>
 
